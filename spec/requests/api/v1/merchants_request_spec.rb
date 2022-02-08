@@ -21,7 +21,7 @@ RSpec.describe 'merchants API' do
     end
   end
 
-  it 'can get a single merchant' do
+  it 'can get a single merchant and their items' do
     id = Merchant.first.id
 
     get "/api/v1/merchants/#{id}"
@@ -33,6 +33,12 @@ RSpec.describe 'merchants API' do
     expect(merchant[:id]).to eq(id)
     expect(merchant).to have_key(:name)
     expect(merchant[:name]).to be_a String
+  end
+
+  xit 'can list a merchants items' do
+    id = Merchant.first.id
+
+
   end
 
 end

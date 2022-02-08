@@ -9,15 +9,15 @@ RSpec.describe 'merchants API' do
   it 'sends a list of all merchants' do
 
     get '/api/v1/merchants'
-
     merchants = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
-    expect(merchants.count).to eq(3)
+    expect(merchants).to be_a Hash
+    expect(merchants[:data].count).to eq(3)
 
-    merchants.each do |merchant|
-      expect(merchant[:id]).to be_an Integer
-      expect(merchant[:name]).to be_a String
+    merchants[:data].each do |merchant|
+      expect(merchant[:id]).to be_an String
+      expect(merchant[:attributes][:name]).to be_a String
     end
   end
 
@@ -29,13 +29,14 @@ RSpec.describe 'merchants API' do
     merchant = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
-    expect(merchant).to have_key(:id)
-    expect(merchant[:id]).to eq(id)
-    expect(merchant).to have_key(:name)
-    expect(merchant[:name]).to be_a String
+    expect(merchant[:data]).to be_a Hash
+    expect(merchant[:data][:attributes]).to have_key(:id)
+    expect(merchant[:data][:attributes][:id].to_i).to eq(id)
+    expect(merchant[:data][:attributes]).to have_key(:name)
+    expect(merchant[:data][:attributes][:name]).to be_a String
   end
 
-  it 'can list a merchants items' do
+  xit 'can list a merchants items' do
     merchant = Merchant.first
     id = merchant.id
 

@@ -10,4 +10,10 @@ class Api::V1::MerchantItemsController < ApplicationController
     end
   end
 
+  def show
+    render json: MerchantSerializer.new(Item.find(params[:id]).merchant)
+  end
+
+
+
 end

@@ -73,7 +73,6 @@ RSpec.describe 'items API' do
     delete ("/api/v1/items/#{item_id}")
 
     # expect(response).to be_succesful
-    # expect(current_path).to eq("/api/v1/items")
     expect(Item.last.id).not_to eq(item_id)
   end
 
@@ -89,7 +88,6 @@ RSpec.describe 'items API' do
     expect(item.name).to eq("New Name")
     expect(item.description).to eq(old_item.description)
     expect(item.unit_price).to eq(old_item.unit_price)
-    # expect(item.merchant_id).to eq(@merchant_3.id)
     expect(item.merchant_id).to eq(@merchant.id)
   end
 
@@ -109,7 +107,6 @@ RSpec.describe 'items API' do
     expect(item.description).to eq("New Sentence")
     expect(item.unit_price).to eq(99.9)
     expect(item.merchant_id).to eq(@merchant_3.id)
-    # expect(item.merchant_id).not_to eq(@merchant.id)
   end
 
   it 'can return 404 if merchant doesnt exist' do
@@ -123,6 +120,17 @@ RSpec.describe 'items API' do
     }
 
     expect(response.status).to eq(404)
+  end
+
+  it 'can find the associated merchant' do
+    get "/api/v1/items/#{Item.first.id}/merchant"
+
+    merchant = JSON.parse(response.body, symbolize_names: true)
+    # require "pry"; binding.pry
+    # expect(response).to be_succesful
+    expect(merchant[:data][:type]).to eq("merchant")
+    expect(merchant[:data][:id]).to eq(@merchant.id.to_s)
+    expect(merchant[:data][:attributes][:name]).to eq(@merchant.name)
   end
 
 end

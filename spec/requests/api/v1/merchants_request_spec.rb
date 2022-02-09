@@ -2,8 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'merchants API' do
 
+
   before :each do
     create_list(:merchant, 3)
+  end
+
+  it 'returns 404 if no items found' do
+    get "/api/v1/merchants/#{Merchant.first.id}/items"
+
+    expect(response.status).to eq(404)
   end
 
   it 'sends a list of all merchants' do
@@ -16,7 +23,7 @@ RSpec.describe 'merchants API' do
     expect(merchants[:data].count).to eq(3)
 
     merchants[:data].each do |merchant|
-      expect(merchant[:id]).to be_an String
+      expect(merchant[:id]).to be_a String
       expect(merchant[:attributes][:name]).to be_a String
     end
   end
@@ -43,11 +50,11 @@ RSpec.describe 'merchants API' do
     create_list(:item, 3, merchant_id: id)
 
     get "/api/v1/merchants/#{id}/items"
-    
+
     items = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
-    require "pry"; binding.pry
+
     items[:data].each do |item|
       expect(item).to have_key(:id)
       expect(item).to have_key(:type)

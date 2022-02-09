@@ -1,20 +1,9 @@
 class Api::V1::ItemsController < ApplicationController
-rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-#
-#
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def record_not_found
     render :status => 404
-
   end
-  # def load_item
-  #   @item = Item.find(params[:id])
-  # end
-
-  # rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  #
-  # def record_not_found
-  #   render status: 400
-  # end
 
   def index
     render json: ItemSerializer.new(Item.all)
@@ -36,7 +25,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   end
 
   def update#add strong params
-    # return render :not_found if Item.find(params[:id]) == nil
     item = Item.find(params[:id])
 
     if params[:merchant_id]

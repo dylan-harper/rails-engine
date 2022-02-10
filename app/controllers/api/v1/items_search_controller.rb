@@ -1,6 +1,6 @@
 class Api::V1::ItemsSearchController < ApplicationController
   def index
-    items = Item.where('name ILIKE ?', "%#{params[:name]}%")
+    items = Item.where('name ILIKE ?', "%#{params[:name]}%").order(:name)
 
     if items == nil
       return render json: { data: { message: 'Items not found'}}

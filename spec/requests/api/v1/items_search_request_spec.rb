@@ -28,7 +28,7 @@ RSpec.describe 'items API search' do
 
     items = JSON.parse(response.body, symbolize_names: true)
 
-    # expect(response).to be_succesful
+    expect(response).to be_successful
 
     expect(items[:data].length).to eq(6)
     items[:data].each do |item|
@@ -44,6 +44,8 @@ RSpec.describe 'items API search' do
     get '/api/v1/items/find_all?name=tas'
 
     items = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
 
     expect(items[:data].length).to eq(6)
     items[:data].each do |item|

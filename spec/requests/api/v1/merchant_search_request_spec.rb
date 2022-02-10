@@ -14,8 +14,8 @@ RSpec.describe 'merchant API search' do
   it 'can search for a merchant with query params' do
     get '/api/v1/merchants/find?name=joh'
 
-    # expect(response).to be_succesful
     merchant = JSON.parse(response.body, symbolize_names: true)
+    expect(response).to be_successful
 
     expect(merchant[:data][:type]).to eq("merchant")
     expect(merchant[:data][:attributes][:name]).to eq("John")
@@ -26,6 +26,7 @@ RSpec.describe 'merchant API search' do
 
     merchant = JSON.parse(response.body, symbolize_names: true)
 
+    expect(response).to be_successful
     expect(merchant[:data][:type]).to eq("merchant")
     expect(merchant[:data][:attributes][:name]).to eq("Jill")
 
@@ -33,6 +34,7 @@ RSpec.describe 'merchant API search' do
 
     merchant = JSON.parse(response.body, symbolize_names: true)
 
+    expect(response).to be_successful
     expect(merchant[:data][:type]).to eq("merchant")
     expect(merchant[:data][:attributes][:name]).to eq("John")
   end
@@ -42,6 +44,7 @@ RSpec.describe 'merchant API search' do
 
     merchant = JSON.parse(response.body, symbolize_names: true)
 
+    expect(response).to be_successful
     expect(response.status).to eq(200)
     expect(merchant[:data]).to eq({:message=>"Merchant not found"})
   end

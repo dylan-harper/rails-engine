@@ -14,13 +14,8 @@ class Api::V1::ItemsController < ApplicationController
   end
 
 
-  def create#validate here? potential error response
-    item = Item.create(
-      name: params["item"]["name"],
-      description: params["item"]["description"],
-      unit_price: params["item"]["unit_price"].to_f,
-      merchant_id: params["item"]["merchant_id"].to_i)
-
+  def create
+      item = Item.create(item_params)
       render json: ItemSerializer.new(Item.find(item.id)), status: :created
   end
 
@@ -52,6 +47,17 @@ private
   def update_item_params
     params.permit("name", "description", "unit_price", "merchant_id")
   end
+
+  # def create_item_params
+  #   params.require(:item).permit("name", "description", "unit_price", "merchant_id")
+  # end
+
+  def item_params
+    params[:item].permit(:name, :description, :unit_price, :merchant_id)
+  end
+  # def item_params
+  #   params.permit(:id)
+  # end
 
   # def delete_item_params
   # end

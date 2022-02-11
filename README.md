@@ -1,4 +1,5 @@
 # Rails-Engine
+![closed pull requests badge](https://img.shields.io/github/issues-pr-closed/dylan-harper/rails-engine?color=blue)
 
 ## Description
 This is a project from the Backend program in the Turing School of Software & Design. This is the first API we have built in rails, and is building out various endpoints for merchants and items. 
@@ -20,25 +21,8 @@ This project was built using Test-Driven-Development in RSpec, as well as a Post
 
 **Gemfile**
 
-
+![pry v badge](https://img.shields.io/gem/v/pry?color=blue&label=pry)
+![shoulda-matchers v badge](https://img.shields.io/gem/v/shoulda-matchers?label=shoulda-matchers)
+![rspec v badge](https://img.shields.io/gem/v/rspec?color=orange&label=rspec)
+![simplecov v badge](https://img.shields.io/gem/v/simplecov?color=green&label=simplecov)
  
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

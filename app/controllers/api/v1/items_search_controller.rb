@@ -1,12 +1,8 @@
 class Api::V1::ItemsSearchController < ApplicationController
+
   def index
     items = Item.search_items(item_params)
-
-    if items == nil
-      return render json: { data: { message: 'Items not found'}}
-    else
-      render json: ItemSerializer.new(items)
-    end
+    render json: ItemSerializer.new(items)
   end
 
   private

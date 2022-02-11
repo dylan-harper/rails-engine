@@ -173,15 +173,15 @@ RSpec.describe 'items API' do
     end
   end
 
-  describe 'edge cases' do
-    xit 'will return 404 for a string id' do
-      merchant = create(:merchant)
-      edge_item = create(:item, id: 'test', merchant_id: merchant.id)
-
-      get "/api/v1/items/#{edge_item.id}"
-
-      expect(response).not_to be_successful
-      expect(response.status).to eq(404)
-    end
-  end
+  # describe 'edge cases' do
+  #   it 'will return 404 for a string id' do
+  #     merchant = create(:merchant)
+  #     edge_item = create(:item, id: 'test', merchant_id: merchant.id)
+  #
+  #     get "/api/v1/items/#{edge_item.id}"
+  #
+  #     expect(response).not_to be_successful
+  #     expect(response.status).to eq(404)
+  #   end
+  # end
 end

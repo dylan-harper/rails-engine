@@ -2,13 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'merchants API' do
 
-  xit 'returns 404 if no merchants exist' do
-    get '/api/v1/merchants'
-
-    expect(response).not_to be_successful
-    expect(response.status).to eq(404)
-  end
-
   before :each do
     create_list(:merchant, 3)
   end
